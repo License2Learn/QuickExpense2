@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_slate_gray"
+    tools:context="com.cs449.android.quickexpense2.LoginActivity">>
+
+    <TextView
+        android:id="@+id/login"
+        android:text="Login"
+        android:textSize="50sp"
+        style="@style/WelcomeScreen" />
+
+    <EditText
+        android:id="@+id/lUsername"
+        android:hint="Username"
+        style="@style/EditTextStyle" />
+
+    <EditText
+        android:id="@+id/lPW"
+        android:hint="Password"
+        style="@style/EditTextStyle" />
+
+    <Button
+        android:id="@+id/to_mainActivity"
+        style="@style/ButtonStyle"
+        android:text="Sign In"
+        android:onClick="goto_Main" />
+
+</LinearLayout>

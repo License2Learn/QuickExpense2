@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_slate_gray">
+
+    <TextView
+        android:id="@+id/register"
+        android:text="Register"
+        android:textSize="50sp"
+        style="@style/WelcomeScreen" />
+
+    <EditText
+        android:id="@+id/rName"
+        android:hint="Name"
+        style="@style/EditTextStyle" />
+
+    <EditText
+        android:id="@+id/rUsername"
+        android:hint="Username"
+        style="@style/EditTextStyle" />
+
+    <EditText
+        android:id="@+id/rPassword"
+        android:hint="Password"
+        style="@style/EditTextStyle" />
+
+    <EditText
+        android:id="@+id/rConfirm"
+        android:hint="Confirm Password"
+        style="@style/EditTextStyle" />
+
+    <Button
+        android:id="@+id/rto_login"
+        android:text="Submit"
+        style="@style/ButtonStyle"
+        android:onClick="goto_Login" />
+
+</LinearLayout>

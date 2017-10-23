@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_slate_gray"
+    tools:context="com.cs449.android.quickexpense2.MainActivity">
+
+    <TextView
+        android:id="@+id/welcome"
+        style="@style/WelcomeScreen"
+        android:text="Welcome \nUSERNAME"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/instruction"
+        android:text="Choose an Activity"
+        style="@style/WelcomeScreen_Subtext" />
+
+    <Button
+        android:id="@+id/to_Expense"
+        style="@style/ButtonStyle"
+        android:text="Add Expense"
+        android:onClick="goto_Expense"/>
+
+</LinearLayout>
