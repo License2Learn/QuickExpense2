@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity
+            android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,10 +22,6 @@
         <activity
             android:name=".AddExpense"
             android:parentActivityName=".MainActivity" />
-        <activity android:name="com.cs449.modal.User" />
-        <activity android:name="com.cs449.sql.DatabaseHelper" />
-        <activity android:name="com.cs449.helpers.InputVallidation" />
-        <activity android:name="com.cs449.helpers.InputValidation"></activity>
     </application>
 
 </manifest>
