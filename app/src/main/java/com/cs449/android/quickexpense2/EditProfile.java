@@ -1,24 +1,26 @@
 package com.cs449.android.quickexpense2;
 
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        import android.support.design.widget.Snackbar;
-        import android.support.design.widget.TextInputEditText;
-        import android.support.design.widget.TextInputLayout;
-        import android.support.v4.widget.NestedScrollView;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.AppCompatButton;
-        import android.support.v7.widget.AppCompatTextView;
-        import android.view.View;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 
-        import com.cs449.android.quickexpense2.R;
-        import com.cs449.helpers.InputValidation;
-        import com.cs449.modal.User;
-        import com.cs449.sql.DatabaseHelper;
+import com.cs449.helpers.InputValidation;
+import com.cs449.modal.User;
+import com.cs449.sql.DatabaseHelper;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * Created by Adam on 11/26/2017.
+ */
 
-    private final AppCompatActivity activity = RegisterActivity.this;
+public class EditProfile extends AppCompatActivity implements View.OnClickListener{
+
+    private final AppCompatActivity activity = EditProfile.this;
 
     private NestedScrollView nestedScrollView;
 
@@ -33,21 +35,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextInputEditText textInputEditTextConfirmPassword;
 
     private AppCompatButton appCompatButtonRegister;
-    private AppCompatTextView appCompatTextViewLoginLink;
 
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
-    private User user;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_screen);
+        setContentView(R.layout.edit_profile);
 
         initViews();
         initListeners();
         initObjects();
-
     }
 
     /**
@@ -56,20 +55,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void initViews() {
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
-        textInputLayoutName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
-        textInputLayoutConfirmPassword = (TextInputLayout) findViewById(R.id.textInputLayoutConfirmPassword);
+        textInputLayoutName = (TextInputLayout) findViewById(R.id.resetInputLayoutName);
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.resetInputLayoutEmail);
+        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.resetInputLayoutPassword);
+        textInputLayoutConfirmPassword = (TextInputLayout) findViewById(R.id.resetInputLayoutConfirmPassword);
 
-        textInputEditTextName = (TextInputEditText) findViewById(R.id.textInputEditTextName);
-        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
-        textInputEditTextConfirmPassword = (TextInputEditText) findViewById(R.id.textInputEditTextConfirmPassword);
+        textInputEditTextName = (TextInputEditText) findViewById(R.id.resetInputEditTextName);
+        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.resetInputEditTextEmail);
+        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.resetInputEditTextPassword);
+        textInputEditTextConfirmPassword = (TextInputEditText) findViewById(R.id.resetInputEditTextConfirmPassword);
 
-        appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
-
-        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
-
+        appCompatButtonRegister = (AppCompatButton) findViewById(R.id.editSubmit);
     }
 
     /**
@@ -77,8 +73,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initListeners() {
         appCompatButtonRegister.setOnClickListener(this);
-        appCompatTextViewLoginLink.setOnClickListener(this);
-
     }
 
     /**
@@ -88,7 +82,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         inputValidation = new InputValidation(activity);
         databaseHelper = new DatabaseHelper(activity);
-        user = new User();
     }
 
 
@@ -100,23 +93,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
-
-            case R.id.appCompatButtonRegister:
-                postDataToSQLite();
-                break;
-
-            case R.id.appCompatTextViewLoginLink:
-
-                finish();
-                break;
+        if (v.getId() == R.id.editSubmit){
+            postDataToSQLite(v);
         }
     }
 
     /**
      * This method is to validate the input text fields and post data to SQLite
      */
-    private void postDataToSQLite() {
+    private void postDataToSQLite(View v) {
 
         if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
             return;
@@ -137,19 +122,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
 
-            user.setName(textInputEditTextName.getText().toString().trim());
-            user.setEmail(textInputEditTextEmail.getText().toString().trim());
-            user.setPassword(textInputEditTextPassword.getText().toString().trim());
-            user.setFood(0);
-            user.setEntertainment(0);
-            user.setTransportation(0);
-            user.setClothes(0);
-            user.setEducation(0);
-
-            databaseHelper.addUser(user);
+            databaseHelper.updateProfile(v.getId(), textInputEditTextName.getText().toString().trim(), textInputEditTextEmail.getText().toString().trim(),
+                    textInputEditTextPassword.getText().toString().trim());
 
             // Snack Bar to show success message that record saved successfully
-            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(nestedScrollView, getString(R.string.success_Message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
 
 

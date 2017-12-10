@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.NoActionBar"
     android:background="@color/dark_slate_gray">
 
     <TextView
@@ -23,16 +24,14 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/unnamed" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/to_login"
         style="@style/ButtonStyle"
-        android:text="Login"
-        android:onClick="goto_Login" />
+        android:text="Login" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/to_register"
         style="@style/ButtonStyle"
-        android:text="Register"
-        android:onClick="goto_Register" />
+        android:text="Register" />
 
 </LinearLayout>

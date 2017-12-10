@@ -27,11 +27,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_NAME = "user_name";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASSWORD = "user_password";
+    private static final String COLUMN_USER_FOOD = "user_food";
+    private static final String COLUMN_USER_ENTERTAINMENT = "user_entertainment";
+    private static final String COLUMN_USER_TRANSPORTATION = "user_transportation";
+    private static final String COLUMN_USER_CLOTHES = "user_clothes";
+    private static final String COLUMN_USER_EDUCATION = "user_education";
+
+    SQLiteDatabase db;
 
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT," +  COLUMN_USER_FOOD + " TEXT," + COLUMN_USER_ENTERTAINMENT + " TEXT," + COLUMN_USER_TRANSPORTATION
+            + " TEXT," + COLUMN_USER_CLOTHES + " TEXT," + COLUMN_USER_EDUCATION + ")";
 
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -48,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        this.db = db;
     }
 
 
@@ -62,49 +71,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    /**
-     * This method is to create user record
-     *
-     * @param user
-     */
+    // This method is to create user record
+
     public void addUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
+
+       // String query = "select * from user";
+       // Cursor cursor = db.rawQuery(query, null);
+       // int count = cursor.getCount();
 
         ContentValues values = new ContentValues();
+        //values.put(COLUMN_USER_ID, count);
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_FOOD, user.getFood());
+        values.put(COLUMN_USER_ENTERTAINMENT, user.getEntertainment());
+        values.put(COLUMN_USER_TRANSPORTATION, user.getTransportation());
+        values.put(COLUMN_USER_CLOTHES, user.getClothes());
+        values.put(COLUMN_USER_EDUCATION, user.getEducation());
 
         // Inserting Row
         db.insert(TABLE_USER, null, values);
         db.close();
     }
 
-    /**
-     * This method is to fetch all user and return the list of user records
-     *
-     * @return list
-     */
+    // This method is to fetch all user and return the list of user records
+
     public List<User> getAllUser() {
         // array of columns to fetch
         String[] columns = {
                 COLUMN_USER_ID,
                 COLUMN_USER_EMAIL,
                 COLUMN_USER_NAME,
-                COLUMN_USER_PASSWORD
+                COLUMN_USER_PASSWORD,
+                COLUMN_USER_FOOD,
+                COLUMN_USER_ENTERTAINMENT,
+                COLUMN_USER_TRANSPORTATION,
+                COLUMN_USER_CLOTHES,
+                COLUMN_USER_EDUCATION
         };
         // sorting orders
         String sortOrder =
                 COLUMN_USER_NAME + " ASC";
         List<User> userList = new ArrayList<User>();
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
 
         // query the user table
         /**
          * Here query function is used to fetch records from user table this function works like we use sql query.
          * SQL query equivalent to this query function is
-         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
+         * SELECT user_id,user_name,user_email,user_password, user_food, user_entert, user_trans, user_clothes, user_edu FROM user ORDER BY user_name;
          */
         Cursor cursor = db.query(TABLE_USER, //Table to query
                 columns,    //columns to return
@@ -123,6 +141,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
                 user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                user.setFood(Float.parseFloat(cursor.getString(cursor.getColumnIndex(COLUMN_USER_FOOD))));
+                user.setEntertainment(Float.parseFloat(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ENTERTAINMENT))));
+                user.setTransportation(Float.parseFloat(cursor.getString(cursor.getColumnIndex(COLUMN_USER_TRANSPORTATION))));
+                user.setClothes(Float.parseFloat(cursor.getString(cursor.getColumnIndex(COLUMN_USER_CLOTHES))));
+                user.setEducation(Float.parseFloat(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EDUCATION))));
                 // Adding user record to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -134,44 +157,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
-    /**
-     * This method to update user record
-     *
-     * @param user
-     */
-    public void updateUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
+
+    // This method will update a users expenses.
+
+    public void updateExpenses(int id, Float food, Float entertainment, Float transportation, Float clothes, Float education) {
+        db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, user.getName());
-        values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+
+        values.put(COLUMN_USER_FOOD, food );
+        values.put(COLUMN_USER_ENTERTAINMENT, entertainment);
+        values.put(COLUMN_USER_TRANSPORTATION, transportation);
+        values.put(COLUMN_USER_CLOTHES, clothes);
+        values.put(COLUMN_USER_EDUCATION, education);
 
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getId())});
+                new String[]{ String.valueOf(id) });
         db.close();
     }
 
-    /**
-     * This method is to delete user record
-     *
-     * @param user
-     */
+    // This method updates a users Profile settings, like name, email and password.
+
+    public void updateProfile(int id, String name, String email, String password){
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_USER_NAME, name );
+        values.put(COLUMN_USER_EMAIL, email);
+        values.put(COLUMN_USER_PASSWORD, password);
+
+        // updating row
+        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
+                new String[]{ String.valueOf(id) });
+        db.close();
+    }
+
+    // This method is to delete user record
+
     public void deleteUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         // delete user record by id
         db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
 
-    /**
-     * This method to check user exist or not
-     *
-     * @param email
-     * @return true/false
-     */
+    // This method resets an expense to 0.
+
+    public void deleteData (int id, String expense) {
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        if (expense == "food"){
+            values.put(COLUMN_USER_FOOD, 0.00);
+        }
+        else if (expense == "entertainment"){
+            values.put(COLUMN_USER_ENTERTAINMENT, 0.00);
+        }
+        else if (expense == "transportation"){
+            values.put(COLUMN_USER_TRANSPORTATION, 0.00);
+        }
+        else if (expense == "clothes"){
+            values.put(COLUMN_USER_CLOTHES, 0.00);
+        }
+        else if (expense == "education"){
+            values.put(COLUMN_USER_EDUCATION, 0.00);
+        }
+
+        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
+                new String[]{ String.valueOf(id) });
+        db.close();
+    }
+
+    // This method to check user exist or not
+
     public boolean checkUser(String email) {
 
         // array of columns to fetch

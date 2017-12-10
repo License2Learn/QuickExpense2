@@ -9,6 +9,9 @@
     <string name="error_message_age">Enter Age</string>
     <string name="error_message_password">Enter Password</string>
     <string name="success_message">Registration Successful</string>
+    <string name="Success_message">Data Submit</string>
+    <string name="Success_Message">Data Reset</string>
+    <string name="success_Message">Profile Changed</string>
     <string name="text_not_member">No account yet? Create one</string>
     <string name="text_already_member">Already a member? Login</string>
     <string name="error_email_exists">Email Already Exists</string>

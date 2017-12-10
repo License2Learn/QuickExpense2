@@ -5,54 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_slate_gray"
-    tools:context="com.cs449.android.quickexpense2.MainActivity">
+    android:theme="@style/AppTheme.NoActionBar"
+    tools:context="com.cs449.android.quickexpense2.DeleteExpense">
 
     <android.support.v7.widget.LinearLayoutCompat
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/welcome"
-            style="@style/WelcomeScreen"
-            android:text="Welcome"
-            android:textSize="30sp" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textViewName"
-            style="@style/WelcomeScreen_Subtext" />
+            android:id="@+id/delete"
+            android:text="Delete"
+            android:textSize="50sp"
+            style="@style/WelcomeScreen" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/addExpense"
+            android:id="@+id/resetFood"
             style="@style/ButtonStyle"
-            android:text="Add Expense" />
+            android:text="Food" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/deleteExpense"
+            android:id="@+id/resetEntertainment"
             style="@style/ButtonStyle"
-            android:text="Delete Expense" />
+            android:text="Entertainment" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/pieGraph"
+            android:id="@+id/resetTransportation"
             style="@style/ButtonStyle"
-            android:text="Pie Graph" />
+            android:text="Transportation" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/barGraph"
+            android:id="@+id/resetClothes"
             style="@style/ButtonStyle"
-            android:text="Bar Graph" />
+            android:text="Clothes" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/editProfile"
+            android:id="@+id/resetEducation"
             style="@style/ButtonStyle"
-            android:text="Edit Profile" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/logOut"
-            style="@style/ButtonStyle"
-            android:text="Log out" />
+            android:text="Education" />
 
     </android.support.v7.widget.LinearLayoutCompat>
-
 </android.support.v4.widget.NestedScrollView>

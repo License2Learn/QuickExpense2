@@ -9,6 +9,11 @@ public class User extends AppCompatActivity {
     private String name;
     private String email;
     private String password;
+    private float food;
+    private float entertainment;
+    private float transportation;
+    private float clothes;
+    private float education;
 
     public int getId() {
         return id;
@@ -42,4 +47,23 @@ public class User extends AppCompatActivity {
         this.password = password;
     }
 
+    public float getFood() { return food; }
+
+    public void setFood(float food) { this.food = food; }
+
+    public float getEntertainment() { return entertainment; }
+
+    public void setEntertainment(float entertainment) { this.entertainment = entertainment; }
+
+    public float getTransportation() { return transportation; }
+
+    public void setTransportation(float transportation) { this.transportation = transportation; }
+
+    public float getClothes() { return clothes; }
+
+    public void setClothes(float clothes) { this.clothes = clothes; }
+
+    public float getEducation() { return education; }
+
+    public void setEducation(float education) { this.education = education; }
 }

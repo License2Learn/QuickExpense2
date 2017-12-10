@@ -6,76 +6,65 @@
     android:layout_height="match_parent"
     android:background="@color/dark_slate_gray"
     android:theme="@style/AppTheme.NoActionBar"
-    tools:context="com.cs449.android.quickexpense2.AddExpense">
+    tools:context="com.cs449.android.quickexpense2.EditProfile">
 
     <android.support.v7.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/addExpense"
-            style="@style/WelcomeScreen"
-            android:text="Add Expense"
-            android:textSize="30sp" />
+            android:id="@+id/edit"
+            android:text="Edit Profile"
+            android:textSize="50sp"
+            style="@style/WelcomeScreen" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutFood"
+            android:id="@+id/resetInputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextFood"
-                android:hint="FOOD                                           $0.00"
+                android:id="@+id/resetInputEditTextName"
+                android:hint="Name"
                 style="@style/EditTextStyle" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutEntertainment"
+            android:id="@+id/resetInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextEntertainment"
-                android:hint="ENTERTAINMENT                     $0.00"
+                android:id="@+id/resetInputEditTextEmail"
+                android:hint="Email"
                 style="@style/EditTextStyle" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutTransportation"
+            android:id="@+id/resetInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextTransportation"
-                android:hint="TRANSPORTATION                  $0.00"
+                android:id="@+id/resetInputEditTextPassword"
+                android:hint="Password"
                 style="@style/EditTextStyle" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutClothes"
+            android:id="@+id/resetInputLayoutConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextClothes"
-                android:hint="CLOTHES                                    $0.00"
-                style="@style/EditTextStyle" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutEducation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextEducation"
-                android:hint="EDUCATION                               $0.00"
+                android:id="@+id/resetInputEditTextConfirmPassword"
+                android:hint="Confirm Password"
                 style="@style/EditTextStyle" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/SubmitExpense"
+            android:id="@+id/editSubmit"
             android:text="Submit"
             style="@style/ButtonStyle" />
 
